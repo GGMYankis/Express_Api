@@ -2,6 +2,7 @@ var conexion = require("../config/conexion");
 
 const ctrl = {};
 
+//Listado de todos los pacientes
 ctrl.pacientes = async (req, res) => {
   try {
     const pool = await conexion.poolPromise;
@@ -24,6 +25,7 @@ ctrl.pacientes = async (req, res) => {
   }
 };
 
+//Listado de todos los medicos
 ctrl.medicos = async (req, res) => {
   try {
     const pool = await conexion.poolPromise;
@@ -46,6 +48,7 @@ ctrl.medicos = async (req, res) => {
   }
 };
 
+//Listado de todos los medicamentos
 ctrl.medicamentos = async (req, res) => {
   try {
     const pool = await conexion.poolPromise;
@@ -65,6 +68,7 @@ ctrl.medicamentos = async (req, res) => {
     });
   }
 };
+//Listado de todos los almacenes
 ctrl.almacen = async (req, res) => {
   try {
     const pool = await conexion.poolPromise;
@@ -85,6 +89,7 @@ ctrl.almacen = async (req, res) => {
   }
 };
 
+//Listado de todas las camas
 ctrl.camas = async (req, res) => {
   try {
     const pool = await conexion.poolPromise;
@@ -107,6 +112,7 @@ ctrl.camas = async (req, res) => {
   }
 };
 
+//Listado de las camas por salas
 ctrl.camasFiltradas = async (req, res) => {
   try {
     const idSala = req.params.idSala;
@@ -130,16 +136,15 @@ ctrl.camasFiltradas = async (req, res) => {
   }
 };
 
+//Listado de las salas
 ctrl.salas = async (req, res) => {
   try {
     const idSala = req.params.idSala;
     const pool = await conexion.poolPromise;
-    const result = await pool
-      .request()
-      .query(
-        `select * from cli_salas
+    const result = await pool.request().query(
+      `select * from cli_salas
         `
-      );
+    );
     res.json({
       status: true,
       value: result.recordset,
